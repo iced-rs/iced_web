@@ -2,6 +2,8 @@
 [![Documentation](https://docs.rs/iced_web/badge.svg)][documentation]
 [![Crates.io](https://img.shields.io/crates/v/iced_web.svg)](https://crates.io/crates/iced_web)
 [![License](https://img.shields.io/crates/l/iced_web.svg)](https://github.com/iced-rs/iced/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/crates/d/iced_web.svg)](https://crates.io/crates/iced_web)
+[![Discord Server](https://img.shields.io/discord/628993209984614400?label=&labelColor=6A7EC2&logo=discord&logoColor=ffffff&color=7389D8)](https://discord.gg/3xZJ65GAhd)
 [![project chat](https://img.shields.io/badge/chat-on_zulip-brightgreen.svg)](https://iced.zulipchat.com)
 
 `iced_web` takes [`iced_core`] and builds a WebAssembly runtime on top. It achieves this by introducing a `Widget` trait that can be used to produce VDOM nodes.
