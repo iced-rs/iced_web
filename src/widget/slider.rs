@@ -57,12 +57,7 @@ where
     ///   * a function that will be called when the [`Slider`] is dragged.
     ///   It receives the new value of the [`Slider`] and must produce a
     ///   `Message`.
-    pub fn new<F>(
-        state: &'a mut State,
-        range: RangeInclusive<T>,
-        value: T,
-        on_change: F,
-    ) -> Self
+    pub fn new<F>(state: &'a mut State, range: RangeInclusive<T>, value: T, on_change: F) -> Self
     where
         F: 'static + Fn(T) -> Message,
     {
@@ -96,10 +91,7 @@ where
     }
 
     /// Sets the style of the [`Slider`].
-    pub fn style(
-        mut self,
-        style_sheet: impl Into<Box<dyn StyleSheet + 'a>>,
-    ) -> Self {
+    pub fn style(mut self, style_sheet: impl Into<Box<dyn StyleSheet + 'a>>) -> Self {
         self.style_sheet = style_sheet.into();
         self
     }
@@ -144,9 +136,10 @@ where
             .attr("value", value.into_bump_str())
             .attr("style", "width: 100%")
             .on("input", move |_root, _vdom, event| {
-                let slider = match event.target().and_then(|t| {
-                    t.dyn_into::<web_sys::HtmlInputElement>().ok()
-                }) {
+                let slider = match event
+                    .target()
+                    .and_then(|t| t.dyn_into::<web_sys::HtmlInputElement>().ok())
+                {
                     None => return,
                     Some(slider) => slider,
                 };
