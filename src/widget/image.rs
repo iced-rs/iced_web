@@ -73,13 +73,11 @@ impl<Message> Widget<Message> for Image {
         use dodrio::bumpalo::collections::String;
 
         let src = match self.handle.data.as_ref() {
-            Data::Path(path) => {
-                String::from_str_in(path.to_str().unwrap_or(""), bump)
-            }
+            Data::Path(path) => String::from_str_in(path.to_str().unwrap_or(""), bump),
             Data::Bytes(bytes) => {
                 // The web is able to infer the kind of image, so we don't have to add a dependency on image-rs to guess the mime type.
                 bumpalo::format!(in bump, "data:;base64,{}", base64::encode(bytes))
-            },
+            }
         }
         .into_bump_str();
 

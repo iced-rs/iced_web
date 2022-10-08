@@ -64,10 +64,7 @@ impl<'a, Message> Checkbox<'a, Message> {
     }
 
     /// Sets the style of the [`Checkbox`].
-    pub fn style(
-        mut self,
-        style_sheet: impl Into<Box<dyn StyleSheet + 'a>>,
-    ) -> Self {
+    pub fn style(mut self, style_sheet: impl Into<Box<dyn StyleSheet + 'a>>) -> Self {
         self.style_sheet = style_sheet.into();
         self
     }
@@ -92,8 +89,7 @@ where
         use dodrio::builder::*;
         use dodrio::bumpalo::collections::String;
 
-        let checkbox_label =
-            String::from_str_in(&self.label, bump).into_bump_str();
+        let checkbox_label = String::from_str_in(&self.label, bump).into_bump_str();
 
         let event_bus = bus.clone();
         let on_toggle = self.on_toggle.clone();

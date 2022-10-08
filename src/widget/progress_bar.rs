@@ -71,8 +71,7 @@ impl<'a, Message> Widget<Message> for ProgressBar<'a> {
         use dodrio::builder::*;
 
         let (range_start, range_end) = self.range.clone().into_inner();
-        let amount_filled =
-            (self.value - range_start) / (range_end - range_start).max(1.0);
+        let amount_filled = (self.value - range_start) / (range_end - range_start).max(1.0);
 
         let style = self.style.style();
 
@@ -89,18 +88,20 @@ impl<'a, Message> Widget<Message> for ProgressBar<'a> {
             )
             .finish();
 
-        let node = div(bump).attr(
-            "style",
-            bumpalo::format!(
-                in bump,
-                "width: {}; height: {}; background: {}; border-radius: {}px; overflow: hidden;",
-                css::length(self.width),
-                css::length(self.height.unwrap_or(Length::Units(30))),
-                css::background(style.background),
-                style.border_radius
+        let node = div(bump)
+            .attr(
+                "style",
+                bumpalo::format!(
+                    in bump,
+                    "width: {}; height: {}; background: {}; border-radius: {}px; overflow: hidden;",
+                    css::length(self.width),
+                    css::length(self.height.unwrap_or(Length::Units(30))),
+                    css::background(style.background),
+                    style.border_radius
+                )
+                .into_bump_str(),
             )
-            .into_bump_str(),
-        ).children(vec![bar]);
+            .children(vec![bar]);
 
         node.finish()
     }

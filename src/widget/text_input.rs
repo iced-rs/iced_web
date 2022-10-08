@@ -50,12 +50,7 @@ impl<'a, Message> TextInput<'a, Message> {
     /// - a placeholder
     /// - the current value
     /// - a function that produces a message when the [`TextInput`] changes
-    pub fn new<F>(
-        state: &'a mut State,
-        placeholder: &str,
-        value: &str,
-        on_change: F,
-    ) -> Self
+    pub fn new<F>(state: &'a mut State, placeholder: &str, value: &str, on_change: F) -> Self
     where
         F: 'static + Fn(String) -> Message,
     {
@@ -112,10 +107,7 @@ impl<'a, Message> TextInput<'a, Message> {
     }
 
     /// Sets the style of the [`TextInput`].
-    pub fn style(
-        mut self,
-        style_sheet: impl Into<Box<dyn StyleSheet + 'a>>,
-    ) -> Self {
+    pub fn style(mut self, style_sheet: impl Into<Box<dyn StyleSheet + 'a>>) -> Self {
         self.style_sheet = style_sheet.into();
         self
     }
@@ -176,9 +168,10 @@ where
             .attr("value", value)
             .attr("type", if self.is_secure { "password" } else { "text" })
             .on("input", move |_root, _vdom, event| {
-                let text_input = match event.target().and_then(|t| {
-                    t.dyn_into::<web_sys::HtmlInputElement>().ok()
-                }) {
+                let text_input = match event
+                    .target()
+                    .and_then(|t| t.dyn_into::<web_sys::HtmlInputElement>().ok())
+                {
                     None => return,
                     Some(text_input) => text_input,
                 };
@@ -187,8 +180,7 @@ where
             })
             .on("keypress", move |_root, _vdom, event| {
                 if let Some(on_submit) = on_submit.clone() {
-                    let event =
-                        event.unchecked_into::<web_sys::KeyboardEvent>();
+                    let event = event.unchecked_into::<web_sys::KeyboardEvent>();
 
                     match event.key_code() {
                         13 => {

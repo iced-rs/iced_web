@@ -43,11 +43,7 @@ impl<Message> Toggler<Message> {
     ///     `Message`.
     ///
     /// [`Toggler`]: struct.Toggler.html
-    pub fn new<F>(
-        is_active: bool,
-        label: impl Into<Option<String>>,
-        f: F,
-    ) -> Self
+    pub fn new<F>(is_active: bool, label: impl Into<Option<String>>, f: F) -> Self
     where
         F: 'static + Fn(bool) -> Message,
     {
