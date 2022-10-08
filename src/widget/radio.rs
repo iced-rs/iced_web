@@ -50,12 +50,7 @@ impl<'a, Message> Radio<'a, Message> {
     ///   * the current selected value
     ///   * a function that will be called when the [`Radio`] is selected. It
     ///   receives the value of the radio and must produce a `Message`.
-    pub fn new<F, V>(
-        value: V,
-        label: impl Into<String>,
-        selected: Option<V>,
-        f: F,
-    ) -> Self
+    pub fn new<F, V>(value: V, label: impl Into<String>, selected: Option<V>, f: F) -> Self
     where
         V: Eq + Copy,
         F: 'static + Fn(V) -> Message,
@@ -71,10 +66,7 @@ impl<'a, Message> Radio<'a, Message> {
     }
 
     /// Sets the style of the [`Radio`] button.
-    pub fn style(
-        mut self,
-        style_sheet: impl Into<Box<dyn StyleSheet + 'a>>,
-    ) -> Self {
+    pub fn style(mut self, style_sheet: impl Into<Box<dyn StyleSheet + 'a>>) -> Self {
         self.style_sheet = style_sheet.into();
         self
     }
@@ -105,8 +97,7 @@ where
         use dodrio::builder::*;
         use dodrio::bumpalo::collections::String;
 
-        let radio_label =
-            String::from_str_in(&self.label, bump).into_bump_str();
+        let radio_label = String::from_str_in(&self.label, bump).into_bump_str();
 
         let event_bus = bus.clone();
         let on_click = self.on_click.clone();

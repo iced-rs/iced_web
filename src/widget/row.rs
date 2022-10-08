@@ -112,8 +112,7 @@ impl<'a, Message> Widget<Message> for Row<'a, Message> {
 
         let row_class = style_sheet.insert(bump, css::Rule::Row);
 
-        let spacing_class =
-            style_sheet.insert(bump, css::Rule::Spacing(self.spacing));
+        let spacing_class = style_sheet.insert(bump, css::Rule::Spacing(self.spacing));
 
         // TODO: Complete styling
         div(bump)
