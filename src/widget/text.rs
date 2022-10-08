@@ -71,19 +71,13 @@ impl Text {
     }
 
     /// Sets the [`HorizontalAlignment`] of the [`Text`].
-    pub fn horizontal_alignment(
-        mut self,
-        alignment: alignment::Horizontal,
-    ) -> Self {
+    pub fn horizontal_alignment(mut self, alignment: alignment::Horizontal) -> Self {
         self.horizontal_alignment = alignment;
         self
     }
 
     /// Sets the [`VerticalAlignment`] of the [`Text`].
-    pub fn vertical_alignment(
-        mut self,
-        alignment: alignment::Vertical,
-    ) -> Self {
+    pub fn vertical_alignment(mut self, alignment: alignment::Vertical) -> Self {
         self.vertical_alignment = alignment;
         self
     }
