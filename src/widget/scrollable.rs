@@ -78,10 +78,7 @@ impl<'a, Message> Scrollable<'a, Message> {
     }
 
     /// Sets the style of the [`Scrollable`] .
-    pub fn style(
-        mut self,
-        style_sheet: impl Into<Box<dyn StyleSheet + 'a>>,
-    ) -> Self {
+    pub fn style(mut self, style_sheet: impl Into<Box<dyn StyleSheet + 'a>>) -> Self {
         self.style_sheet = style_sheet.into();
         self
     }

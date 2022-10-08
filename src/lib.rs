@@ -85,8 +85,7 @@ pub use iced_futures::executor;
 pub use iced_futures::futures;
 
 pub use iced_core::{
-    Alignment, Background, Color, Font, Length, Padding, Point, Rectangle,
-    Size, Vector,
+    Alignment, Background, Color, Font, Length, Padding, Point, Rectangle, Size, Vector,
 };
 
 #[doc(no_inline)]
@@ -167,8 +166,7 @@ pub trait Application {
         let document = window.document().unwrap();
         let body = document.body().unwrap();
 
-        let (sender, receiver) =
-            iced_futures::futures::channel::mpsc::unbounded();
+        let (sender, receiver) = iced_futures::futures::channel::mpsc::unbounded();
 
         let mut runtime = iced_futures::Runtime::new(
             Self::Executor::new().expect("Create executor"),
@@ -228,10 +226,7 @@ impl<'a, A> dodrio::Render<'a> for Instance<A>
 where
     A: Application,
 {
-    fn render(
-        &self,
-        context: &mut dodrio::RenderContext<'a>,
-    ) -> dodrio::Node<'a> {
+    fn render(&self, context: &mut dodrio::RenderContext<'a>) -> dodrio::Node<'a> {
         use dodrio::builder::*;
 
         let mut ui = self.application.borrow_mut();
@@ -338,13 +333,10 @@ pub trait Embedded {
         let document = window.document().unwrap();
         let container: HtmlElement = container_id
             .map(|id| document.get_element_by_id(&id).unwrap())
-            .map(|container| {
-                container.dyn_ref::<HtmlElement>().unwrap().to_owned()
-            })
+            .map(|container| container.dyn_ref::<HtmlElement>().unwrap().to_owned())
             .unwrap_or_else(|| document.body().unwrap());
 
-        let (sender, receiver) =
-            iced_futures::futures::channel::mpsc::unbounded();
+        let (sender, receiver) = iced_futures::futures::channel::mpsc::unbounded();
 
         let mut runtime = iced_futures::Runtime::new(
             Self::Executor::new().expect("Create executor"),
@@ -411,10 +403,7 @@ impl<'a, A> dodrio::Render<'a> for EmbeddedInstance<A>
 where
     A: Embedded,
 {
-    fn render(
-        &self,
-        context: &mut dodrio::RenderContext<'a>,
-    ) -> dodrio::Node<'a> {
+    fn render(&self, context: &mut dodrio::RenderContext<'a>) -> dodrio::Node<'a> {
         use dodrio::builder::*;
 
         let mut ui = self.application.borrow_mut();
